@@ -196,6 +196,9 @@ input[type=number]{width:100%;min-width:0;border:0;outline:0;background:transpar
 .primary .compare-v{color:var(--brown)}
 .compare-item.applied{border-color:rgba(22,199,132,.34);background:linear-gradient(135deg,rgba(22,199,132,.14),rgba(18,183,245,.10))}
 .primary .compare-item.applied{border-color:rgba(22,199,132,.34);background:linear-gradient(135deg,rgba(22,199,132,.14),rgba(18,183,245,.10))}
+.compare-item.final-applied{border-color:rgba(7,87,248,.42);background:linear-gradient(135deg,rgba(7,87,248,.18),rgba(22,199,132,.16));box-shadow:0 10px 24px rgba(7,87,248,.14)}
+.compare-item.final-applied .compare-k{color:var(--blue)}
+.compare-item.final-applied .compare-v{font-size:16px;color:var(--blue)}
 .compare-note{font-size:11px;color:#756A61;line-height:1.55;margin-top:8px}
 .primary .compare-note{color:var(--muted)}
 @media(max-width:760px){.compare-grid{grid-template-columns:repeat(2,1fr)}}
@@ -328,6 +331,14 @@ details[open] summary::after{content:"−"}
                 <span class="live-val" id="termYearsv">30년</span>
               </span>
             </label>
+            <div class="option-row">
+              <div class="option-label">상환 방식</div>
+              <div class="segmented">
+                <button class="tb on" data-repayment="equalPayment">원리금균등분할상환<small>매월 같은 원리금</small></button>
+                <button class="tb" data-repayment="equalPrincipal">원금균등분할상환<small>초기 부담 높고 점차 감소</small></button>
+                <button class="tb" data-repayment="graduated">체증식<small>초기 낮고 점차 증가</small></button>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -404,7 +415,7 @@ details[open] summary::after{content:"−"}
       <div class="guide-card">
         <div class="guide-title">핵심 계산식</div>
         <div class="formula"><b>총 필요자금</b> = 매매가 + 취득세 등 + 법무 비용 + 주택채권 할인금액 + 공인중개 보수</div>
-        <div class="formula"><b>최대 대출 금액</b> = DSR, LTV, 주택 시가별 대출 상한 중 가장 작은 값</div>
+        <div class="formula"><b>최대 대출 금액</b> = DSR, LTV, 토지거래허가구역 주택 시가별 대출 상한 중 가장 작은 값</div>
         <div class="formula"><b>최대 구매 가능 가격</b> = 총 필요자금에서 최대 대출 금액을 뺀 현금 부담이 입력한 가용 현금 이하가 되는 최대 매매가</div>
         <div class="formula"><b>법무 비용</b> = 100만원 + 매매가 × 0.08%를 기초로 하되, 최소 150만원·최대 400만원 범위에서 10만원 단위 올림</div>
         <div class="formula"><b>주택채권 할인금액</b> = 매매가 × 85% × 채권 매입률 × 8%</div>
@@ -430,7 +441,7 @@ details[open] summary::after{content:"−"}
         <div class="glossary">
           <div class="term"><b>가용 현금</b>매수자가 실제로 투입할 수 있는 현금입니다. 이 계산기에서는 취득세와 중개보수 등 부대비용까지 이 현금 안에서 납부한다고 봅니다.</div>
           <div class="term"><b>총 필요자금</b>매매가만이 아니라 집을 사기 위해 실제로 필요한 전체 금액입니다.</div>
-          <div class="term"><b>최대 대출 금액</b>DSR, LTV, 대출 상한을 모두 적용한 뒤 실제로 쓸 수 있다고 계산된 대출 금액입니다.</div>
+          <div class="term"><b>최대 대출 금액</b>DSR, LTV, 토지거래허가구역 대출 상한을 적용한 뒤 실제로 쓸 수 있다고 계산된 대출 금액입니다.</div>
           <div class="term"><b>DSR</b>연소득 대비 연간 원리금 상환액 비율입니다. 이 계산기에서는 기타 부채 월상환액을 연간 금액으로 환산해 먼저 차감한 뒤 40% 한도를 적용합니다.</div>
           <div class="term"><b>LTV</b>집값 대비 대출 가능 비율입니다. 토지거래허가구역은 일반 40%·생애최초 70%, 그 외 수도권은 일반 70%·생애최초 70%, 지방은 일반 70%·생애최초 80%로 반영하며 결과 카드의 제한 요인 비교에서 적용 한도를 확인할 수 있습니다.</div>
         </div>
@@ -439,7 +450,7 @@ details[open] summary::after{content:"−"}
       <div class="guide-card foot">
         <b>대출 만기:</b> 입력한 만기를 기준으로 원리금 균등 상환액과 DSR을 계산합니다. 단, 수도권 주택구입 목적 대출은 정책·은행 기준에 따라 만기 제한이 적용될 수 있습니다.<br>
         <b>국민주택채권:</b> 서울·광역시 주택 소유권 이전등기 기준 매입률을 적용합니다. 기준금액은 보수적으로 매매가의 85%로 추정하고, 즉시매도 고객부담률은 8.0%로 자동 가정했습니다.<br>
-        <b>대출 상한:</b> 주택 시가 기준으로 15억원 이하 6억원, 15억원 초과~25억원 이하 4억원, 25억원 초과 2억원을 적용합니다.<br>
+        <b>대출 상한:</b> 토지거래허가구역 선택 시 주택 시가 기준으로 15억원 이하 6억원, 15억원 초과~25억원 이하 4억원, 25억원 초과 2억원을 적용합니다.<br>
         <b>정책 기준일:</b> 2026년 5월 현재 알려진 기준을 간이 반영했습니다.<br>
         <b>주의:</b> 실제 대출 가능액, 세금, 채권 할인율, 법무사 비용, 중개보수는 계약 조건·주택 면적·은행 심사·시점별 고시값에 따라 달라질 수 있습니다.
       </div>
@@ -451,6 +462,7 @@ details[open] summary::after{content:"−"}
 // ── State ──
 let inc1=5000, inc2=5000, sf=10000, otherDebtMonthly=0, rate=4.5, termYears=30;
 let loanType='mixed', region='metro', firstHome=false;
+let repaymentType='equalPayment';
 
 // ── Conservative ancillary cost assumptions ──
 const AUTO_BOND_BASE_RATIO = 85;
@@ -479,6 +491,41 @@ function pmt(annualRatePct, years) {
   return r * pow / (pow - 1);
 }
 
+function repaymentLabel(type) {
+  if (type === 'equalPrincipal') return '원금균등분할상환';
+  if (type === 'graduated') return '체증식';
+  return '원리금균등분할상환';
+}
+
+function stepUpMonthlyFactors(annualRatePct, years) {
+  const r = annualRatePct / 100 / 12;
+  const n = years * 12;
+  const finalMultiplier = 1.9;
+  let pv = 0;
+  let firstYearMultiplierSum = 0;
+  for (let month = 1; month <= n; month++) {
+    const progress = n === 1 ? 1 : (month - 1) / (n - 1);
+    const multiplier = 1 + (finalMultiplier - 1) * progress;
+    pv += multiplier / Math.pow(1 + r, month);
+    if (month <= 12) firstYearMultiplierSum += multiplier;
+  }
+  const firstMonthly = pv > 0 ? 1 / pv : 1 / n;
+  return { monthly: firstMonthly, annual: firstMonthly * firstYearMultiplierSum };
+}
+
+function repaymentFactors(annualRatePct, years, type) {
+  const r = annualRatePct / 100 / 12;
+  const n = years * 12;
+  if (type === 'equalPrincipal') {
+    const monthly = (1 / n) + r;
+    const firstYearInterest = r * (12 - (66 / n));
+    return { monthly, annual: (12 / n) + firstYearInterest };
+  }
+  if (type === 'graduated') return stepUpMonthlyFactors(annualRatePct, years);
+  const monthly = pmt(annualRatePct, years);
+  return { monthly, annual: monthly * 12 };
+}
+
 // ── Format ──
 function fmt(v, short = false) {
   if (v >= 10000) {
@@ -493,13 +540,15 @@ function fmtPct(v, digits=1) {
 }
 
 // ── Tiered loan cap ──
-function getLoanCap(price) {
+function getLoanCap(price, region) {
+  if (region !== 'regulated') return Infinity;
   if (price <= 150000) return 60000;
   if (price <= 250000) return 40000;
   return 20000;
 }
 
-function getLoanCapLabel(price) {
+function getLoanCapLabel(price, region) {
+  if (region !== 'regulated') return '상한 없음';
   if (price <= 150000) return '6억 상한';
   if (price <= 250000) return '4억 상한';
   return '2억 상한';
@@ -601,18 +650,18 @@ function calcTransactionCosts(price, isFirstHome) {
   return { taxInfo, bondInfo, brokerageInfo, legalFee, totalAncillary };
 }
 
-function calcLoanLimit(price, maxLoanDsr, ltv) {
+function calcLoanLimit(price, maxLoanDsr, ltv, region) {
   const ltvLoan = price * ltv;
-  const cap = getLoanCap(price);
+  const cap = getLoanCap(price, region);
   const loan = Math.min(maxLoanDsr, cap, ltvLoan);
   let binding = 'DSR';
-  if (Math.abs(loan - cap) < 10) binding = getLoanCapLabel(price);
+  if (Number.isFinite(cap) && Math.abs(loan - cap) < 10) binding = getLoanCapLabel(price, region);
   else if (Math.abs(loan - ltvLoan) < 10) binding = 'LTV';
   return { loan, binding, cap, ltvLoan };
 }
 
 // ── Max purchasable price including acquisition tax and ancillary costs ──
-function maxPrice(maxLoanDsr, selfFunding, ltv, isFirstHome) {
+function maxPrice(maxLoanDsr, selfFunding, ltv, isFirstHome, region) {
   const tiers = [
     { low: 0, high: 150000, tier: 1 },
     { low: 150001, high: 250000, tier: 2 },
@@ -620,7 +669,7 @@ function maxPrice(maxLoanDsr, selfFunding, ltv, isFirstHome) {
   ];
 
   function feasible(price) {
-    const { loan } = calcLoanLimit(price, maxLoanDsr, ltv);
+    const { loan } = calcLoanLimit(price, maxLoanDsr, ltv, region);
     const costs = calcTransactionCosts(price, isFirstHome);
     return price + costs.totalAncillary - loan <= selfFunding + 0.0001;
   }
@@ -634,7 +683,7 @@ function maxPrice(maxLoanDsr, selfFunding, ltv, isFirstHome) {
       else hi = mid;
     }
     const price = Math.floor(lo);
-    const loanInfo = calcLoanLimit(price, maxLoanDsr, ltv);
+    const loanInfo = calcLoanLimit(price, maxLoanDsr, ltv, region);
     const costs = calcTransactionCosts(price, isFirstHome);
     const grossCost = price + costs.totalAncillary;
     const cashRequired = grossCost - loanInfo.loan;
@@ -661,7 +710,7 @@ function maxPrice(maxLoanDsr, selfFunding, ltv, isFirstHome) {
     const costs = calcTransactionCosts(0, isFirstHome);
     return {
       price: 0, loan: 0, tier: 1, binding: '가용 현금',
-      dsrLoan: maxLoanDsr, ltvLoan: 0, capLoan: getLoanCap(0),
+      dsrLoan: maxLoanDsr, ltvLoan: 0, capLoan: getLoanCap(0, region),
       taxInfo: costs.taxInfo, bondInfo: costs.bondInfo, brokerageInfo: costs.brokerageInfo,
       legalFee: costs.legalFee, ancillaryCost: 0, grossCost: 0, cashRequired: 0
     };
@@ -676,23 +725,23 @@ function calcCard(income) {
   const stressAdd = getStressRate(region, loanType);
   const dsrRate = +(rate + stressAdd).toFixed(2);
 
-  const annualFactor = pmt(dsrRate, termYears) * 12;
-  const realMonthlyFactor = pmt(rate, termYears);
+  const dsrFactors = repaymentFactors(dsrRate, termYears, repaymentType);
+  const realFactors = repaymentFactors(rate, termYears, repaymentType);
 
   const annualOtherDebtPayment = otherDebtMonthly * 12;
   const annualDsrCapacity = Math.max(0, recognized * 0.40 - annualOtherDebtPayment);
-  const maxLoanDsr = Math.round(annualDsrCapacity / annualFactor);
+  const maxLoanDsr = Math.round(annualDsrCapacity / dsrFactors.annual);
   const ltv = getLtv(region, firstHome);
 
-  const result = maxPrice(maxLoanDsr, sf, ltv, firstHome);
+  const result = maxPrice(maxLoanDsr, sf, ltv, firstHome, region);
   const { loan, price, tier, binding, dsrLoan, ltvLoan, capLoan, taxInfo, bondInfo, brokerageInfo, legalFee, ancillaryCost, grossCost, cashRequired } = result;
 
-  const monthly = +(loan * realMonthlyFactor).toFixed(1);
-  const dsrPct = recognized > 0 ? Math.round(((loan * annualFactor) + annualOtherDebtPayment) / recognized * 100) : 0;
+  const monthly = +(loan * realFactors.monthly).toFixed(1);
+  const dsrPct = recognized > 0 ? Math.round(((loan * dsrFactors.annual) + annualOtherDebtPayment) / recognized * 100) : 0;
   const loanPct = Math.round(loan / Math.max(grossCost, 1) * 100);
   const cashPct = Math.max(0, 100 - loanPct);
 
-  return { recognized, stressAdd, dsrRate, maxLoanDsr, annualDsrCapacity, ltv, loan, price, tier, binding, dsrLoan, ltvLoan, capLoan, monthly, dsrPct, loanPct, cashPct, taxInfo, bondInfo, brokerageInfo, legalFee, ancillaryCost, grossCost, cashRequired, annualFactor };
+  return { recognized, stressAdd, dsrRate, maxLoanDsr, annualDsrCapacity, ltv, loan, price, tier, binding, dsrLoan, ltvLoan, capLoan, monthly, dsrPct, loanPct, cashPct, taxInfo, bondInfo, brokerageInfo, legalFee, ancillaryCost, grossCost, cashRequired, annualFactor: dsrFactors.annual };
 }
 
 // ── UI helpers ──
@@ -710,7 +759,8 @@ function meterColor(pct) {
   return '#16C784';
 }
 
-function tierWarn(tier) {
+function tierWarn(tier, region) {
+  if (region !== 'regulated') return '';
   if (tier === 2) return '<div class="warn-tier">15억원 초과~25억원 이하 구간 · 대출 상한 4억원 적용</div>';
   if (tier === 3) return '<div class="warn-tier">25억원 초과 구간 · 대출 상한 2억원 적용</div>';
   return '';
@@ -739,9 +789,9 @@ function limitCompare(r) {
         </div>
         <div class="compare-item ${r.binding !== 'DSR' && r.binding !== 'LTV' && r.binding !== '가용 현금' ? 'applied' : ''}">
           <div class="compare-k">시가별 상한</div>
-          <div class="compare-v">${fmt(r.capLoan, true)}</div>
+          <div class="compare-v">${Number.isFinite(r.capLoan) ? fmt(r.capLoan, true) : '적용 안 함'}</div>
         </div>
-        <div class="compare-item applied">
+        <div class="compare-item applied final-applied">
           <div class="compare-k">최종 적용</div>
           <div class="compare-v">${fmt(r.loan, true)}</div>
         </div>
@@ -777,7 +827,7 @@ function resultCard({ title, kicker, sub, r, income, primary }) {
           ${bindingPill(r.binding, primary)}
         </div>
 
-        ${tierWarn(r.tier)}
+        ${tierWarn(r.tier, region)}
 
         <div class="price-block">
           <div class="price-lbl">최대 구매 가능 가격</div>
@@ -802,9 +852,9 @@ function resultCard({ title, kicker, sub, r, income, primary }) {
             <div class="metric-note">${r.binding}</div>
           </div>
           <div class="metric-box">
-            <div class="metric-label">월 원리금 상환액</div>
+            <div class="metric-label">${repaymentType === 'graduated' ? '초기 월상환액' : '월 원리금 상환액'}</div>
             <div class="metric-value">${r.monthly.toFixed(1)}만</div>
-            <div class="metric-note">대출 금리 기준</div>
+            <div class="metric-note">${repaymentLabel(repaymentType)}</div>
           </div>
         </div>
 
@@ -920,6 +970,11 @@ document.getElementById('termYears').addEventListener('change', function () {
 document.querySelectorAll('[data-type]').forEach(b => b.addEventListener('click', function () {
   document.querySelectorAll('[data-type]').forEach(x => x.classList.remove('on'));
   this.classList.add('on'); loanType = this.dataset.type; render();
+}));
+
+document.querySelectorAll('[data-repayment]').forEach(b => b.addEventListener('click', function () {
+  document.querySelectorAll('[data-repayment]').forEach(x => x.classList.remove('on'));
+  this.classList.add('on'); repaymentType = this.dataset.repayment; render();
 }));
 
 document.querySelectorAll('[data-region]').forEach(b => b.addEventListener('click', function () {
